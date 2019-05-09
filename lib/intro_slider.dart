@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
+import 'package:flare_flutter/flare_actor.dart';
 class IntroSlider extends StatefulWidget {
   /// An array of Slide object
   final List<Slide> slides;
@@ -647,6 +647,7 @@ class IntroSliderState extends State<IntroSlider>
           slides[i].styleDescription,
           slides[i].marginDescription,
           slides[i].pathImage,
+          slides[i].animation,
           slides[i].widthImage,
           slides[i].heightImage,
           slides[i].onCenterItemPress,
@@ -682,6 +683,7 @@ class IntroSliderState extends State<IntroSlider>
 
     // Image
     String pathImage,
+    String animation,
     double widthImage,
     double heightImage,
     Function onCenterItemPress,
@@ -754,14 +756,14 @@ class IntroSliderState extends State<IntroSlider>
 
             // Image or Center widget
             GestureDetector(
-              child: pathImage != null
-                  ? Image.asset(
-                      pathImage,
-                      width: widthImage ?? 200.0,
-                      height: heightImage ?? 200.0,
-                      fit: BoxFit.contain,
-                    )
-                  : Center(child: centerWidget ?? Container()),
+              child: animation != null
+                  ? FlareActor(pathImage, animation: animation,)
+                  : Image.asset(
+                pathImage,
+                width: widthImage ?? 200.0,
+                height: heightImage ?? 200.0,
+                fit: BoxFit.contain,
+              ),
               onTap: onCenterItemPress,
             ),
 
@@ -828,7 +830,7 @@ class Slide {
   // Image
   /// Path to your local image
   String pathImage;
-
+  String animation;
   /// Width of image
   double widthImage;
 
@@ -888,6 +890,7 @@ class Slide {
 
     // Image (if specified centerWidget is not displayed)
     String pathImage,
+    String animation,
     double widthImage,
     double heightImage,
     Function onCenterItemPress,
@@ -923,6 +926,7 @@ class Slide {
 
     // Image
     this.pathImage = pathImage;
+    this.animation = animation;
     this.widthImage = widthImage;
     this.heightImage = heightImage;
     this.onCenterItemPress = onCenterItemPress;

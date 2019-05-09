@@ -8,6 +8,7 @@ version: 1.2.3
 dependencies:
   flutter:
     sdk: flutter
+  flare_flutter: ^1.0.2
 
 flutter:
   plugin:
